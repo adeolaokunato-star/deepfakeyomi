@@ -1,0 +1,15 @@
+services:
+  database:
+    image: postgres:16
+    container_name: mirrora-database
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-mirrora}
+      POSTGRES_USER: ${POSTGRES_USER:-mirrora_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local_dev_password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - mirrora_postgres_data:/var/lib/postgresql/data
+volumes:
+  mirrora_postgres_data:
